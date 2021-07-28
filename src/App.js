@@ -107,7 +107,7 @@ class App {
 
     localStorage.setItem('language', this.language);
 
-    const weatherInfo = await fetcher.getWeatherInfo(this.language, this.usersLocationInfo.city);
+    const weatherInfo = await fetcher.getWeatherInfo(this.language, this.usersLocationInfo.loc);
     this.weatherInfo = weatherInfo;
 
     this.render();
