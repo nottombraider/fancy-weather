@@ -62,7 +62,7 @@ class App {
       this.language,
     );
     const map = new Map(lat, lon);
-    const forecastNextDays = new Forecast(forecast, this.language);
+    const forecastNextDays = new Forecast(forecast, this.language, this.temperatureUnits);
 
     [currentWeather.getRef(), forecastNextDays.getRef()]
       .forEach((child) => weatherContainer.appendChild(child));

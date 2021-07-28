@@ -1,10 +1,11 @@
 import handlers from './handlers';
 
 class Forecast {
-  constructor({ forecastday }, language) {
+  constructor({ forecastday }, language, temperatureUnits) {
     this.ref = null;
     this.forecast = forecastday;
     this.language = language;
+    this.temperatureUnits = temperatureUnits;
 
     this.init();
   }
@@ -28,7 +29,7 @@ class Forecast {
       // week day temperature
       const weekDayTemperature = document.createElement('div');
       weekDayTemperature.className = 'text-4xl';
-      weekDayTemperature.innerHTML = `${Math.round(day.day.avgtemp_c)}${handlers.DEGREE_HTML_SYMBOL}`;
+      weekDayTemperature.innerHTML = `${Math.round(this.temperatureUnits === 'c' ? day.day.avgtemp_c : day.day.avgtemp_f)}${handlers.DEGREE_HTML_SYMBOL}`;
 
       // week day weather condition
       const weekDayCondition = document.createElement('img');
