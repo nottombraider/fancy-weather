@@ -6,10 +6,11 @@ import Clock from './Clock';
 import handlers from './handlers';
 
 class Dashboard {
-  constructor(cityName, countryName, dateTime) {
+  constructor(cityName, countryName, language, dateTime) {
     this.ref = null;
     this.cityName = cityName;
     this.countryName = countryName;
+    this.language = language;
     this.dateTime = handlers.getDate(dateTime, this.language);
 
     this.init();

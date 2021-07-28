@@ -49,6 +49,7 @@ class App {
     const dashboard = new Dashboard(
       location.name,
       location.country,
+      this.language,
       location.localtime,
     );
     const currentWeather = new CurrentWeather(
