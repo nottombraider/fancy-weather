@@ -38,8 +38,6 @@ class App {
   render() {
     this.appContainer.innerHTML = '';
 
-    Notification.showNotification('Hello World');
-
     const { location, current, forecast } = this.weatherInfo;
     const { loc } = this.usersLocationInfo;
     const [lat, lon] = loc.split(',');
