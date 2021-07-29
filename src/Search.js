@@ -37,9 +37,8 @@ class Search {
   }
 
   onClick(callBack) {
-    this.searchInputRef.innerHTML = '';
+    this.searchButtonRef.onclick = () => callBack(this.searchInputData);
     this.searchInputData = '';
-    this.searchButtonRef.addEventListener('click', () => callBack(this.searchInputData));
   }
 
   getSearchBarRef() {

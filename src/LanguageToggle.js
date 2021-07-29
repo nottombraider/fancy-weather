@@ -30,7 +30,7 @@ class LanguageToggle {
   }
 
   onChange(callBack) {
-    this.ref.addEventListener('change', callBack);
+    this.ref.onchange = callBack;
   }
 
   getRef() {

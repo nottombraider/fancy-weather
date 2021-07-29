@@ -48,7 +48,7 @@ class TemperatureUnitsToggle {
   }
 
   onClick(callBack) {
-    this.ref.addEventListener('click', callBack);
+    this.ref.onclick = callBack;
 
     this.reRender();
   }

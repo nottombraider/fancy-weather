@@ -24,7 +24,7 @@ class BackgroundToggle {
   }
 
   onClick(callBack) {
-    this.ref.addEventListener('click', callBack);
+    this.ref.onclick = callBack;
   }
 }
 
