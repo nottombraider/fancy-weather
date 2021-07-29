@@ -6,18 +6,33 @@ import Clock from './Clock';
 import handlers from './handlers';
 
 class Dashboard {
-  constructor(cityName, countryName, language, dateTime) {
-    this.ref = null;
+  constructor() {
+    this.headerRef = document.createElement('header');
+    this.locationNameContainer = document.createElement('h1');
+    this.dateContainer = document.createElement('span');
+    this.cityName = null;
+    this.countryName = null;
+    this.language = null;
+    this.dateTime = null;
+  }
+
+  setData(cityName, countryName, language, dateTime) {
     this.cityName = cityName;
     this.countryName = countryName;
     this.language = language;
     this.dateTime = handlers.getDate(dateTime, this.language);
 
-    this.init();
+    return this;
+  }
+
+  render() {
+    this.locationNameContainer.innerHTML = `${this.cityName}, ${this.countryName}`;
+    this.dateContainer.innerHTML = this.dateTime;
+
+    return this;
   }
 
   init() {
-    const header = document.createElement('header');
     const dashboard = document.createElement('div');
     const togglersContainer = document.createElement('div');
     const titleContainer = document.createElement('div');
@@ -27,19 +42,16 @@ class Dashboard {
     titleContainer.className = 'pl-4';
 
     // location name - city, country
-    const locationNameContainer = document.createElement('h1');
-    locationNameContainer.innerHTML = `${this.cityName}, ${this.countryName}`;
-    locationNameContainer.className = 'text-4xl md:text-5xl';
-    titleContainer.appendChild(locationNameContainer);
+    this.locationNameContainer.className = 'text-4xl md:text-5xl';
+    titleContainer.appendChild(this.locationNameContainer);
 
     // local date and time
     const dateTimeContainer = document.createElement('h2');
     dateTimeContainer.className = 'text-xl md:text-3xl md:mb-7';
     const timeContainer = Clock();
-    const dateContainer = document.createElement('span');
-    dateContainer.className = 'mr-3';
-    dateContainer.innerHTML = this.dateTime;
-    dateTimeContainer.appendChild(dateContainer);
+    this.dateContainer.className = 'mr-3';
+
+    dateTimeContainer.appendChild(this.dateContainer);
     dateTimeContainer.appendChild(timeContainer);
     titleContainer.appendChild(dateTimeContainer);
 
@@ -48,15 +60,15 @@ class Dashboard {
 
     dashboard.appendChild(togglersContainer);
     dashboard.appendChild(Search.getSearchBarRef());
-    header.appendChild(dashboard);
-    header.appendChild(titleContainer);
+    this.headerRef.appendChild(dashboard);
+    this.headerRef.appendChild(titleContainer);
 
-    this.ref = header;
+    return this;
   }
 
   getRef() {
-    return this.ref;
+    return this.headerRef;
   }
 }
 
-export default Dashboard;
+export default new Dashboard();

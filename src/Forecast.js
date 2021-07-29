@@ -1,18 +1,23 @@
 import handlers from './handlers';
 
 class Forecast {
-  constructor({ forecastday }, language, temperatureUnits) {
-    this.ref = null;
+  constructor() {
+    this.forecastContainer = document.createElement('div');
+    this.forecast = null;
+    this.language = null;
+    this.temperatureUnits = null;
+  }
+
+  setData({ forecastday }, language, temperatureUnits) {
     this.forecast = forecastday;
     this.language = language;
     this.temperatureUnits = temperatureUnits;
 
-    this.init();
+    return this;
   }
 
-  init() {
-    const forecastContainer = document.createElement('div');
-    forecastContainer.className = 'flex overflow-x-scroll my-8 pl-2 md:justify-around md:overflow-auto md:my-0 md:mt-8';
+  render() {
+    this.forecastContainer.innerHTML = '';
 
     this.forecast.forEach((day, i) => {
       const dayRef = document.createElement('div');
@@ -36,19 +41,25 @@ class Forecast {
       weekDayCondition.src = day.day.condition.icon;
       weekDayCondition.className = 'w-12';
 
-      forecastContainer.appendChild(dayRef);
+      this.forecastContainer.appendChild(dayRef);
       dayRef.appendChild(weekDayName);
       dayRef.appendChild(dayWeatherWrapper);
       dayWeatherWrapper.appendChild(weekDayTemperature);
       dayWeatherWrapper.appendChild(weekDayCondition);
     });
 
-    this.ref = forecastContainer;
+    return this;
+  }
+
+  init() {
+    this.forecastContainer.className = 'flex overflow-x-scroll my-8 pl-2 md:justify-around md:overflow-auto md:my-0 md:mt-8';
+
+    return this;
   }
 
   getRef() {
-    return this.ref;
+    return this.forecastContainer;
   }
 }
 
-export default Forecast;
+export default new Forecast();

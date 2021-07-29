@@ -1,36 +1,45 @@
-import fetcher from './fetch';
+import { mapURL } from './fetch';
 import handlers from './handlers';
 
 class Map {
-  constructor(lat, lon) {
-    this.mapContainer = null;
+  constructor() {
+    this.mapContainer = document.createElement('div');
+    this.mapRef = document.createElement('iframe');
+    this.latRef = document.createElement('div');
+    this.lonRef = document.createElement('div');
+    this.lat = null;
+    this.lon = null;
+  }
+
+  setData(lat, lon) {
     this.lat = lat;
     this.lon = lon;
 
-    this.init();
+    return this;
+  }
+
+  render() {
+    this.mapRef.src = mapURL(this.lat, this.lon);
+    this.latRef.innerHTML = `Latitude: ${handlers.transformLatLon(this.lat)}`;
+    this.lonRef.innerHTML = `Longitude: ${handlers.transformLatLon(this.lon)}`;
+
+    return this;
   }
 
   init() {
-    const mapContainer = document.createElement('div');
-    const map = document.createElement('iframe');
-    const lat = document.createElement('div');
-    const lon = document.createElement('div');
+    this.mapContainer.className = 'px-3 py-3 self-center md:py-0 md:pb-2 md:self-end';
+    this.mapRef.className = 'rounded-2xl mb-4';
+    this.latRef.className = 'text-right';
+    this.lonRef.className = 'text-right';
 
-    mapContainer.className = 'px-3 py-3 self-center md:py-0 md:pb-2 md:self-end';
-    map.className = 'rounded-2xl mb-4';
-    lat.className = 'text-right';
-    lon.className = 'text-right';
+    this.mapRef.width = '220';
+    this.mapRef.height = '220';
+    this.mapRef.title = 'Map';
 
-    map.width = '220';
-    map.height = '220';
-    map.title = 'Map';
-    map.src = fetcher.mapURL(this.lat, this.lon);
-    lat.innerHTML = `Latitude: ${handlers.transformLatLon(this.lat)}`;
-    lon.innerHTML = `Longitude: ${handlers.transformLatLon(this.lon)}`;
+    [this.mapRef, this.latRef, this.lonRef]
+      .forEach((child) => this.mapContainer.appendChild(child));
 
-    [map, lat, lon].forEach((child) => mapContainer.appendChild(child));
-
-    this.mapContainer = mapContainer;
+    return this;
   }
 
   getRef() {
@@ -38,4 +47,4 @@ class Map {
   }
 }
 
-export default Map;
+export default new Map();
