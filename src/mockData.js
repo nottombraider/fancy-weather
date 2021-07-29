@@ -1,4 +1,4 @@
-const mockIpInfoResponse = {
+const mockIPInfoResponse = {
   ip: '89.64.54.123',
   hostname: '89-64-54-123.dynamic.chello.pl',
   city: 'Katowice',
@@ -347,7 +347,7 @@ const mockImgInfoResponse = {
 const mockData = {
   mockWeatherInfoResponse,
   mockImgInfoResponse,
-  mockIpInfoResponse,
+  mockIPInfoResponse,
 };
 
 export default mockData;
