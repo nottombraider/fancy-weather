@@ -1,0 +1,11 @@
+.notification-message {
+  animation: showMessage 3s;
+}
+
+.bg-toggle {
+  transition: transform 1s ease-in-out;
+}
+
+.bg-toggle:hover {
+  transform: rotate(360deg);
+}

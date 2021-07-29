@@ -1,10 +1,13 @@
+import '../styles/animations.css';
+
 class Notification {
   constructor() {
     this.notificationContainer = document.createElement('div');
+    this.notificationMessageContainer = document.createElement('div');
   }
 
   showNotification(message) {
-    this.notificationContainer.innerHTML = message;
+    this.notificationMessageContainer.innerHTML = message;
     this.notificationContainer.style.display = 'block';
 
     setTimeout(() => {
@@ -22,7 +25,9 @@ class Notification {
 
   init() {
     this.notificationContainer.style.display = 'none';
-    this.notificationContainer.className = 'absolute pt-2 text-center text-2xl text-white w-full h-14 bg-red-500 bg-opacity-75 left-1/2 transform -translate-x-2/4 top-0';
+    this.notificationContainer.className = 'absolute w-full h-14  top-0';
+    this.notificationMessageContainer.className = 'notification-message relative py-2 text-center text-2xl bg-red-500 bg-opacity-75';
+    this.notificationContainer.appendChild(this.notificationMessageContainer);
     document.body.appendChild(this.notificationContainer);
 
     return this;
