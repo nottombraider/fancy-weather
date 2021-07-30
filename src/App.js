@@ -46,8 +46,10 @@ class App {
 
     document.body.appendChild(this.appContainer);
     document.body.style.backgroundImage = `url(${this.bgImage})`;
+    document.body.title = this.bgImage;
     document.body.className = 'bg-black bg-opacity-70 text-white py-5 bg-cover bg-fixed md:pt-12';
     this.appContainer.className = 'max-w-screen-md m-auto md:px-4';
+    this.appContainer.id = 'appContainer';
     main.className = 'flex flex-col md:flex-row md:justify-between';
     weatherContainer.className = 'md:self-end';
 

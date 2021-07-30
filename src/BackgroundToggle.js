@@ -8,7 +8,7 @@ class BackgroundToggle {
   }
 
   init() {
-    const backgroundToggle = document.createElement('div');
+    const backgroundToggle = document.createElement('button');
     const iconRefresh = document.createElement('i');
 
     iconRefresh.className = 'bg-toggle fa fa-refresh self-center py-3 px-4';
@@ -19,6 +19,8 @@ class BackgroundToggle {
     backgroundToggle.appendChild(iconRefresh);
 
     this.ref = backgroundToggle;
+
+    return this;
   }
 
   getRef() {

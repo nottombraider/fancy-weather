@@ -9,7 +9,7 @@ class TemperatureUnitsToggle {
   }
 
   init() {
-    const temperatureUnitsContainer = document.createElement('div');
+    const temperatureUnitsContainer = document.createElement('button');
 
     temperatureUnitsContainer.className = 'flex justify-between items-center bg-black bg-opacity-25 border-2 border-white border-opacity-50 rounded';
 
