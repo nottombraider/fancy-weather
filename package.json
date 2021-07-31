@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "test": "react-scripts test"
   },
   "author": "nottombraider",
   "license": "ISC",
@@ -13,12 +14,16 @@
     "@babel/core": "^7.14.8",
     "@babel/plugin-transform-runtime": "^7.14.5",
     "@babel/preset-env": "^7.14.8",
+    "@testing-library/dom": "^8.1.0",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/user-event": "^13.2.1",
     "autoprefixer": "^9.8.6",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.23.4",
     "parcel-bundler": "^1.12.5",
     "postcss": "^7.0.36",
+    "react-scripts": "^4.0.3",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
   }
 }
