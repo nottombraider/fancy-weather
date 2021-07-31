@@ -1,4 +1,5 @@
 import handlers from './handlers';
+import titles from './titles';
 
 class Forecast {
   constructor() {
@@ -18,27 +19,45 @@ class Forecast {
 
   render() {
     this.forecastContainer.innerHTML = '';
+    const {
+      forecastContainerTittle,
+      dayRefTitle,
+      weekDayNameTitle,
+      dayWeatherWrapperTitle,
+      weekDayTemperatureTitle,
+      weekDayConditionTitle,
+    } = titles.forecastTitles;
+
+    this.forecastContainer.title = forecastContainerTittle;
 
     this.forecast.forEach((day, i) => {
       const dayRef = document.createElement('div');
+      const dayName = handlers.getDate(day.date, this.language, 'day', i);
+
+      dayRef.title = dayRefTitle(i + 1);
 
       // week day name
       const weekDayName = document.createElement('div');
+      weekDayName.title = weekDayNameTitle;
       weekDayName.className = 'uppercase text-lg';
-      weekDayName.innerHTML = handlers.getDate(day.date, this.language, 'day', i);
+      weekDayName.innerHTML = dayName;
 
       // day weather details wrapper
       const dayWeatherWrapper = document.createElement('div');
+      dayWeatherWrapper.title = dayWeatherWrapperTitle(dayName);
       dayWeatherWrapper.className = 'flex w-32';
 
       // week day temperature
       const weekDayTemperature = document.createElement('div');
+      weekDayTemperature.title = weekDayTemperatureTitle(dayName);
       weekDayTemperature.className = 'text-4xl';
       weekDayTemperature.innerHTML = `${Math.round(this.temperatureUnits === 'c' ? day.day.avgtemp_c : day.day.avgtemp_f)}${handlers.DEGREE_HTML_SYMBOL}`;
 
       // week day weather condition
       const weekDayCondition = document.createElement('img');
+      weekDayCondition.title = weekDayConditionTitle(dayName);
       weekDayCondition.src = day.day.condition.icon;
+      weekDayCondition.alt = day.day.condition.text;
       weekDayCondition.className = 'w-12';
 
       this.forecastContainer.appendChild(dayRef);

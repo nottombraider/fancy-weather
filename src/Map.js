@@ -1,5 +1,6 @@
 import { mapURL } from './fetch';
 import handlers from './handlers';
+import titles from './titles';
 
 class Map {
   constructor() {
@@ -34,7 +35,7 @@ class Map {
 
     this.mapRef.width = '220';
     this.mapRef.height = '220';
-    this.mapRef.title = 'Map';
+    this.mapRef.title = titles.mapTitles.mapTitle;
 
     [this.mapRef, this.latRef, this.lonRef]
       .forEach((child) => this.mapContainer.appendChild(child));

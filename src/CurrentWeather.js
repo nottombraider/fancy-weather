@@ -1,5 +1,6 @@
 import langData from './langData';
 import handlers from './handlers';
+import titles from './titles';
 
 class CurrentWeather {
   constructor() {
@@ -41,7 +42,6 @@ class CurrentWeather {
     this.degree.innerHTML = `${handlers.DEGREE_HTML_SYMBOL}`;
     this.conditionIconRef.src = this.conditionIcon;
     this.conditionIconRef.alt = this.conditionText;
-    this.conditionIconRef.title = this.conditionText;
 
     const { detailedWeather } = langData.appLanguage[this.language];
     [
@@ -51,6 +51,8 @@ class CurrentWeather {
       { key: detailedWeather.humidity, value: `${this.humidity}%` },
     ].forEach(({ key, value }) => {
       const weatherDetailContainer = document.createElement('div');
+
+      weatherDetailContainer.title = key || value;
 
       if (key) {
         weatherDetailContainer.innerHTML = `${key.toUpperCase()}: ${value}`;
@@ -65,29 +67,33 @@ class CurrentWeather {
   }
 
   init() {
-    this.currentWeatherContainer.className = 'md:flex md:flex-col pl-4';
-
-    // temperature
+    const {
+      currentWeatherContainerTitle,
+      temperatureContainerTitle,
+      currTemperatureTitle,
+      degreeTitle,
+      conditionIconRefTitle,
+      weatherDetailedStateContainerTitle,
+    } = titles.currentWeatherTitles;
     const temperatureContainer = document.createElement('div');
+
+    this.currentWeatherContainer.className = 'flex flex-col pl-4 items-center mt-2 md:flex-row md:justify-around';
+    this.conditionIconRef.className = 'w-40 md:w-24 md:self-start';
     this.currTemperature.className = 'text-9xl font-medium';
     this.degree.className = 'text-7xl align-top';
-    temperatureContainer.appendChild(this.currTemperature);
-    temperatureContainer.appendChild(this.degree);
-
-    // condition icon
-    this.conditionIconRef.className = 'w-40 md:w-24 md:self-start';
-
-    // weather state container
-    const weatherStateContainer = document.createElement('div');
-    weatherStateContainer.className = 'flex flex-col items-center mt-2 sm:flex-row md:justify-around';
-    weatherStateContainer.appendChild(temperatureContainer);
-    weatherStateContainer.appendChild(this.conditionIconRef);
-    this.currentWeatherContainer.appendChild(weatherStateContainer);
-
-    // detailed weather state container
     this.weatherDetailedStateContainer.className = 'text-2xl md:text-base md:self-end';
 
-    weatherStateContainer.appendChild(this.weatherDetailedStateContainer);
+    this.currentWeatherContainer.title = currentWeatherContainerTitle;
+    temperatureContainer.title = temperatureContainerTitle;
+    this.currTemperature.title = currTemperatureTitle;
+    this.degree.title = degreeTitle;
+    this.conditionIconRef.title = conditionIconRefTitle;
+    this.weatherDetailedStateContainer.title = weatherDetailedStateContainerTitle;
+
+    [temperatureContainer, this.conditionIconRef, this.weatherDetailedStateContainer]
+      .forEach((child) => this.currentWeatherContainer.appendChild(child));
+    temperatureContainer.appendChild(this.currTemperature);
+    temperatureContainer.appendChild(this.degree);
 
     return this;
   }

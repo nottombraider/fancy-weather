@@ -12,6 +12,7 @@ import Search from './Search';
 import MapSection from './Map';
 import Notification from './Notification';
 import mockData from './mockData';
+import titles from './titles';
 
 class App {
   constructor() {
@@ -38,6 +39,7 @@ class App {
   render() {
     this.appContainer.innerHTML = '';
 
+    const { appContainerTitle, mainTitle, weatherContainerTitle } = titles.appContainerTitles;
     const { location, current, forecast } = this.weatherInfo;
     const { loc } = this.usersLocationInfo;
     const [lat, lon] = loc.split(',');
@@ -46,12 +48,15 @@ class App {
 
     document.body.appendChild(this.appContainer);
     document.body.style.backgroundImage = `url(${this.bgImage})`;
-    document.body.title = this.bgImage;
     document.body.className = 'bg-black bg-opacity-70 text-white py-5 bg-cover bg-fixed md:pt-12';
-    this.appContainer.className = 'max-w-screen-md m-auto md:px-4';
+    this.appContainer.className = 'max-w-screen-md m-auto';
     this.appContainer.id = 'appContainer';
     main.className = 'flex flex-col md:flex-row md:justify-between';
     weatherContainer.className = 'md:self-end';
+
+    this.appContainer.title = appContainerTitle;
+    main.title = mainTitle;
+    weatherContainer.title = weatherContainerTitle;
 
     const dashboard = this.dashboard.setData(
       location.name,

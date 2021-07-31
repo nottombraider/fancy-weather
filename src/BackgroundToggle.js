@@ -1,4 +1,5 @@
 import '../styles/animations.css';
+import titles from './titles';
 
 class BackgroundToggle {
   constructor() {
@@ -8,13 +9,14 @@ class BackgroundToggle {
   }
 
   init() {
+    const { backgroundToggleTitle, iconRefreshTitle } = titles.backgroundToggleTitles;
     const backgroundToggle = document.createElement('button');
     const iconRefresh = document.createElement('i');
 
     iconRefresh.className = 'bg-toggle fa fa-refresh self-center py-3 px-4';
     backgroundToggle.className = 'bg-black bg-opacity-25 border-2 border-white border-opacity-50 rounded';
-    backgroundToggle.title = 'Change background image';
-    backgroundToggle.id = 'bg-toggle';
+    backgroundToggle.title = backgroundToggleTitle;
+    iconRefresh.title = iconRefreshTitle;
 
     backgroundToggle.appendChild(iconRefresh);
 

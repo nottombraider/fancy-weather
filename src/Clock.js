@@ -1,7 +1,11 @@
 import handlers from './handlers';
+import titles from './titles';
 
 const Clock = () => {
   const clock = document.createElement('span');
+
+  clock.title = titles.clockTitles.clockTitle;
+
   const setTime = () => {
     const current = new Date();
     let h = current.getHours();

@@ -1,4 +1,5 @@
 import langData from './langData';
+import titles from './titles';
 
 class Search {
   constructor() {
@@ -12,11 +13,21 @@ class Search {
   }
 
   init() {
+    const {
+      searBarTitle,
+      searchInputTitle,
+      searchButtonTitle,
+      searchButtonIconTitle,
+    } = titles.searchTitles;
     const searchBar = document.createElement('div');
     const searchInput = document.createElement('input');
     const searchButton = document.createElement('button');
     const searchButtonIcon = document.createElement('i');
 
+    searchBar.title = searBarTitle;
+    searchInput.title = searchInputTitle;
+    searchButton.title = searchButtonTitle;
+    searchButtonIcon.title = searchButtonIconTitle;
     searchInput.placeholder = langData.appLanguage[this.language].searchInputPlaceholder;
 
     searchBar.className = 'flex justify-center items-center';
